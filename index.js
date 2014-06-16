@@ -28,8 +28,12 @@ var create = exports.create = function(words) {
 	_optimizeFinishSuffixes(trie, keepEnd, end);
 
 	trie.$ = endings;
+	return trie;
+}
 
-	return _stringifyTrie(trie);
+var serialize = exports.serialize = function(trie, validJSON) {
+	if (validJSON) return JSON.serialize(trie);
+	else return _stringifyTrie(trie);
 }
 
 /*
@@ -111,6 +115,7 @@ function _optimizeFinishSuffixes(cur, keepEnd, end) {
 	}
 }
 
+var reserved = require('reserved');
 function _stringifyTrie(trie) {
 	var ret = JSON.stringify(trie).replace(/"/g, '');
 
