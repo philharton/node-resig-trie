@@ -1,4 +1,11 @@
+/**
+ * Create a trie object from an array of words
+ *
+ * @param words Array The words to trie-ify
+ * @return Object The trie object
+ */
 var create = exports.create = function(words) {
+	if (!words || words == null || words.length == 0) return null;
 	var trie = {};
 
 	for (var i = 0, wordsLength = words.length; i < wordsLength; i++) {
@@ -17,8 +24,11 @@ var create = exports.create = function(words) {
 	}
 
 	_optimize(trie);
+	var end = {};
 	_optimizeSuffixes(trie, end);
 
+	var keepEnd = {};
+	var endings = [0];
 	for (var key in end) {
 		if (end[key].count <= 10) continue;
 		keepEnd[key] = endings.length;
@@ -31,18 +41,36 @@ var create = exports.create = function(words) {
 	return trie;
 }
 
+/**
+ * Take a trie object and serialize it (into a string)
+ *
+ * @param trie Object The trie object
+ * @param validJSON Boolean Whether the output should be valid JSON (the
+ *                          alternative is more compact)
+ * @return String The serialized trie
+ */
 var serialize = exports.serialize = function(trie, validJSON) {
-	if (validJSON) return JSON.serialize(trie);
+	if (validJSON) return JSON.stringify(trie);
 	else return _stringifyTrie(trie);
 }
 
-/*
+/**
+ * Take a serialized trie (as a string) and make it an object
+ *
+ * @param trieString String The serialized trie
+ * @return Object The trie object
+ * @warning This uses eval(), so don't pass user input
+ */
+var unserialize = exports.unserialize = function(trieString) {
+	return eval('(' + trieString + ')');
+}
+
+/**
  * Search for a word in a trie.
  *
  * @param word String The word to look for in the trie
  * @param trie Object The trie object (@see load)
  * @param cur null Do not pass this
- *
  * @return Boolean Whether the word is in the trie
  */
 var find = exports.find = function(word, trie, cur) {
