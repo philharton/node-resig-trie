@@ -12,5 +12,3 @@ var find = exports.find = function(word, trie, cur) {
 
 	return false;
 }
-
-console.log(find('googleearth', eval('(' + require('fs').readFileSync('dict/suffix.js', 'utf8') + ')')));
