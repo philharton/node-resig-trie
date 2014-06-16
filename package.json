@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/JoshTheGeek/resig-trie.git"
+    "url": "https://github.com/JoshTheGeek/node-resig-trie.git"
   },
   "keywords": [
     "trie",
@@ -26,7 +26,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JoshTheGeek/resig-trie/issues"
+    "url": "https://github.com/JoshTheGeek/node-resig-trie/issues"
   },
-  "homepage": "https://github.com/JoshTheGeek/resig-trie"
+  "homepage": "https://github.com/JoshTheGeek/node-resig-trie"
 }
