@@ -1,6 +1,6 @@
 {
   "name": "resig-trie",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "John Resig's trie implementation, prettified and packaged for npm",
   "main": "index.js",
   "dependencies": {
