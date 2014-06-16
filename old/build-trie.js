@@ -24,7 +24,7 @@ for ( var i = 0, l = words.length; i < l; i++ ) {
 	}
 }
 
-/*
+///*
 // Optimize the structure
 optimize( trie );
 
@@ -42,7 +42,7 @@ for ( var key in end ) {
 finishSuffixes( trie, keepEnd, end );
 
 trie.$ = endings;
-*/
+//*/
 
 var ret = JSON.stringify( trie ).replace(/"/g, "");
 
