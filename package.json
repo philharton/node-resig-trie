@@ -1,0 +1,32 @@
+{
+  "name": "resig-trie",
+  "version": "0.1.0",
+  "description": "John Resig's trie implementation, prettified and packaged for npm",
+  "main": "index.js",
+  "dependencies": {
+    "reserved": "^0.1.2"
+  },
+  "devDependencies": {
+    "should": "^4.0.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JoshTheGeek/resig-trie.git"
+  },
+  "keywords": [
+    "trie",
+    "dictionary"
+  ],
+  "author": "John Resig",
+  "contributors": [
+    "Josh Oldenburg (https://github.com/JoshTheGeek)"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoshTheGeek/resig-trie/issues"
+  },
+  "homepage": "https://github.com/JoshTheGeek/resig-trie"
+}
