@@ -1,21 +1,30 @@
-# [A Simple JavaScript Trie Generator](http://ejohn.org/blog/javascript-trie-performance-analysis/)
+# [A Simple JavaScript Trie](http://ejohn.org/blog/javascript-trie-performance-analysis/)
 ## By John Resig
 
-Copyright 2011 John Resig  
-MIT Licensed
+## Install
 
-All code is designed to work in Node.js.
+	npm install --save resig-trie
 
-To clone this repository including the [Benchmark.js](http://benchmarkjs.com/) submodule:
+## Usage
 
-    git clone --recursive https://github.com/jeresig/trie-js.git
+```js
+var trie = require('trie');
 
-To build an optimized Trie run:
+trie.create(['a', 'an', 'banana', 'bananas', 'byte', 'boolean', 'chocolate', 'code', ...]);
+//=> <trie object>
 
-    node build-trie.js > dict/suffix.js
+trie.serialize(<trie object>, true); // true to create valid JSON
+//=> '<trie object as JSON>'
 
-To dump a full dictionary of words from the Trie do:
+trie.serialize(<trie object>, false); // false to create valid JavaScript (not JSON) - more efficient, but must be require('<trie')d
+//=> '<trie object as long string>'
 
-    node dump-trie.js
+trie.find(<trie object>, 'banana');
+//=> true, because 'banana' is in the trie
 
-A sample function for finding a word in the Trie can be see in `util.js`, named `findTrieWord`.
+trie.find(<trie object>, 'microsoft');
+//=> false, because 'microsoft' is not in the trie
+```
+
+## License
+Copyright 2011 John Resig. Packaged as a simple npm module by Josh Oldenburg in 2014. Released under the MIT license.
