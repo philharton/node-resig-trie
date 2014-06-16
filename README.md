@@ -16,8 +16,13 @@ trie.create(['a', 'an', 'banana', 'bananas', 'byte', 'boolean', 'chocolate', 'co
 trie.serialize(<trie object>, true); // true to create valid JSON
 //=> '<trie object as JSON>'
 
-trie.serialize(<trie object>, false); // false to create valid JavaScript (not JSON) - more efficient, but must be require('<trie')d
+trie.serialize(<trie object>, false); // false to create valid JavaScript (not JSON) - more efficient, but must be `eval`'ed
 //=> '<trie object as long string>'
+
+// Warning: this uses eval(), so don't pass user input. When the trie is
+// serialized as JSON, you can just JSON.parse() it.
+trie.unserialize(<trie string>);
+//=> <trie object>
 
 trie.find(<trie object>, 'banana');
 //=> true, because 'banana' is in the trie
