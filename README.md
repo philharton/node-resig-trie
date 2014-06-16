@@ -1,5 +1,4 @@
-# [A Simple JavaScript Trie](http://ejohn.org/blog/javascript-trie-performance-analysis/)
-## By John Resig
+# [A Simple JavaScript Trie](http://ejohn.org/blog/javascript-trie-performance-analysis/), by John Resig
 
 ## Install
 
@@ -32,4 +31,6 @@ trie.find(<trie object>, 'microsoft');
 ```
 
 ## License
-Copyright 2011 John Resig. Packaged as a simple npm module by Josh Oldenburg in 2014. Released under the MIT license.
+Copyright 2011 John Resig. Josh Oldenburg packaged this as a simple npm module in 2014.
+
+Released under the MIT license.
