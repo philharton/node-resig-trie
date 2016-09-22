@@ -4,6 +4,7 @@
  * @param words Array The words to trie-ify
  * @return Object The trie object
  */
+/* eslint-disable */
 var create = exports.create = function(words) {
 	if (!words || words == null || words.length == 0) return null;
 	var trie = {};
@@ -100,15 +101,24 @@ var findLongestFirstWord = exports.findLongestFirstWord = function(word, trie, c
 	cur = cur || trie;
 
 	for (var node in cur) {
-		if (word.indexOf(node) === 0) {
+		var nodeWithoutDollarSign = node;
+		if (node.length > 1 && node.indexOf('$') === node.length - 1) {
+			nodeWithoutDollarSign = node.slice(0, node.length - 1);
+		}
+		if (word.indexOf(node) === 0 || word.indexOf(nodeWithoutDollarSign) === 0) {
 			var val = (typeof cur[node] === "number" && cur[node] ? trie.$[cur[node]] : cur[node]);
 
-			if (node.length === word.length) {
-				return val === 0 || val.$ === 0
+			if (val === 0) {
+				return nodeWithoutDollarSign;
 			}
-			else {
-				return word.slice(0, node.length) + findLongestFirstWord(word.slice(node.length), trie, val);
+			if (nodeWithoutDollarSign.length === word.length) {
+				return (val === 0 || val.$ === 0) ? nodeWithoutDollarSign : '';
 			}
+			var remaining = findLongestFirstWord(word.slice(nodeWithoutDollarSign.length), trie, val);
+			if (remaining.length > 0) {
+				return nodeWithoutDollarSign + remaining;
+			}
+			return (val.$ === 0) ? nodeWithoutDollarSign : '';
 		}
 	}
 
