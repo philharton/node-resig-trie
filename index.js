@@ -9,6 +9,9 @@ var create = exports.create = function(words) {
 	if (!words || words == null || words.length == 0) return null;
 	var trie = {};
 
+	// must sort first for trie to be built properly
+	words.sort((a, b) => a.localeCompare(b));
+
 	for (var i = 0, wordsLength = words.length; i < wordsLength; i++) {
 		var word = words[i];
 		var letters = word.split('');
