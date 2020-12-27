@@ -132,7 +132,19 @@ var findLongestFirstWord = exports.findLongestFirstWord = function(word, trie, c
  * Find possible words in a string
  */
 
-var findPossibleWords = exports.findPossibleWords = function(word, trie) {
+var findPossibleWords = exports.findPossibleWords = function(text, trie) {
+  const possibleWords = {};
+
+  for (let i = 0; i < text.length; i++) {
+    const possibleWordsFromThisPoint = findPossibleWordsForFirstChar(text.slice(i), trie)
+    possibleWordsFromThisPoint.forEach(word=>{
+      possibleWords[word] = true;
+    });
+  }
+  return Object.keys(possibleWords);
+}
+
+var findPossibleWordsForFirstChar = function(word, trie) {
   const possibleWords =  findPossibleWordsRecurse(word, trie)
   if (typeof possibleWords === 'string') {
     return possibleWords ? [possibleWords] : []
