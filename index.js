@@ -128,6 +128,66 @@ var findLongestFirstWord = exports.findLongestFirstWord = function(word, trie, c
 	return '';
 }
 
+/**
+ * Find possible words in a string
+ */
+
+var findPossibleWords = exports.findPossibleWords = function(word, trie) {
+  const possibleWords =  findPossibleWordsRecurse(word, trie)
+  if (typeof possibleWords === 'string') {
+    return possibleWords ? [possibleWords] : []
+  }
+  return possibleWords
+}
+
+var findPossibleWordsRecurse = function(word, trie, cur, buf) {
+  cur = cur || trie;
+  buf = buf || ''
+
+	for (var node in cur) {
+		var nodeWithoutDollarSign = node;
+		if (node.length > 1 && node.indexOf('$') === node.length - 1) {
+			nodeWithoutDollarSign = node.slice(0, node.length - 1);
+		}
+		if (word.indexOf(node) === 0 || word.indexOf(nodeWithoutDollarSign) === 0) {
+			var val = (typeof cur[node] === "number" && cur[node] ? trie.$[cur[node]] : cur[node]);
+      const isWord = val.$ === 0
+
+      // leaf node
+
+			if (val === 0) {
+				return buf + nodeWithoutDollarSign;
+      }
+
+			if (nodeWithoutDollarSign.length === word.length) {
+				return isWord ? buf + nodeWithoutDollarSign : '';
+      }
+
+      // non-leaf
+
+      var remaining = findPossibleWordsRecurse(word.slice(nodeWithoutDollarSign.length), trie, val, buf + nodeWithoutDollarSign);
+
+      if (typeof remaining === 'string') {
+        if (remaining.length > 0) {
+          if (isWord) {
+            return [buf + nodeWithoutDollarSign, remaining]
+          }
+          return remaining
+        }
+      } else if (typeof remaining === 'object') {
+        if (isWord) {
+          return [buf + nodeWithoutDollarSign].concat(remaining)
+        }
+        return remaining
+      }
+
+      return isWord ? buf + nodeWithoutDollarSign : '';
+		}
+	}
+
+	return '';
+}
+
 // Private functions
 function _optimize(cur) {
 	var num = 0;
